@@ -7,7 +7,7 @@ import "dotenv/config";
 // import waterRouter from "./routes/api/water.js";
 // import swaggerDocument from "./swagger.json" assert { type: "json" };
 import authRouter from "./routes/authRouter.js";
-import HttpError from "./helpers/HttpError.js";
+// import HttpError from "./helpers/HttpError.js";
 
 const app = express();
 
@@ -22,15 +22,13 @@ app.use(express.json());
 // app.use("/api/water", waterRouter);
 app.use("/api/users", authRouter);
 
-// Один middleware для обробки всіх помилок
 app.use((err, req, res, next) => {
-  if (typeof err.status !== "undefined" && typeof err.message !== "undefined") {
-    // Перевіряємо, чи err має властивості status та message
-    res.status(err.status).json({ message: err.message });
-  } else {
-    console.error(err.stack);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
+    if (typeof err.status !== "undefined" && typeof err.message !== "undefined") {
+        res.status(err.status).json({ message: err.message });
+    } else {
+        console.error(err.stack);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
 });
 
 export default app;
