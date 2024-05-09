@@ -34,13 +34,13 @@ const signup = async (req, res, next) => {
             verificationToken,
         });
 
-        // const verifyEmail = {
-        //     to: email,
-        //     subject: "Verify email",
-        //     html: `<a target="_blank" href="${PROJECT_URL}/api/users/verify/${verificationToken}">Click verify email</a>`,
-        // };
+        const verifyEmail = {
+            to: email,
+            subject: "Verify email",
+            html: `<a target="_blank" href="${PROJECT_URL}/api/users/verify/${verificationToken}">Click verify email</a>`,
+        };
 
-        // await sendEmail(verifyEmail);
+        await sendEmail(verifyEmail);
         res.status(201).json({ 
             user: {
             name: newUser.name,
